@@ -19,6 +19,12 @@ router.use(auth);
 router.use('/users', userRouter);
 router.use('/cards', cardRouter);
 
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 router.use((req: Request, res: Response, next: NextFunction) => {
   next(new NotFoundError('Маршрут не найден'));
 });
